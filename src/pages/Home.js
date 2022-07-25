@@ -65,8 +65,8 @@ const Home = () => {
                         {
                             products.map(product => (
                                 <Col key={product.id}>
-                                    <Card className='size-card' style={{ cursor: 'pointer' }} onClick={() => navigate(`/products/${product.id}`)}>
-                                        <Card.Img variant='top' src={product.productImgs[0]} className='image-card px-5' />
+                                    <Card style={{ cursor: 'pointer' }} onClick={() => navigate(`/products/${product.id}`)}>
+                                        <Card.Img variant='top' src={product.productImgs[0]} className='px-2' />
                                         <Card.Body>
                                             <Card.Title>{product.title}</Card.Title>
                                             <h1>

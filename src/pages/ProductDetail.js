@@ -3,8 +3,9 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterProductCategory } from '../store/slices/products.slice'
-import { Row, Col, Card, Button, FormGroup } from 'react-bootstrap';
+import { Row, Col, Button, FormGroup } from 'react-bootstrap';
 import { addToCart } from '../store/slices/cart.slice';
+import '../styles/product-detail.css'
 
 
 const ProductDetail = () => {
@@ -58,28 +59,28 @@ const ProductDetail = () => {
                                 />
                         <Button className='col' onClick={() => addCart()}>Agregar al carrito</Button>
                     </FormGroup>
-
                 </Col>
             </Row>
             <Row className='d-flex'>
                 {
                     products.map(product => (
-                        <Col lg={3} xs={6} key={product.id} onClick={() => Navigate(`/Products/${product.id}`)} className='mt-5'>
-                            <Card>
-                                <Card.Img variant="top" src={product?.productImgs} className='image-card' />
-                                <Card.Body className='text-center'>
-                                    <Card.Title>{product?.title}</Card.Title>
-                                </Card.Body>
-                            </Card>
+                        <Col key={product.id} onClick={() => Navigate(`/Products/${product.id}`)}> 
+                            <div className='cards mt-5'>
+                                <div className='heading'>
+                                    <div className="title">
+                                        <h3>{product?.title}</h3>
+                                    </div>
+                                    <div className='image'>
+                                        <img src={product?.productImgs} alt='' />
+                                    </div>
+                                </div>
+                            </div>
                         </Col>
 
                     ))
                 }
             </Row>
         </div>
-
-
-
     );
 };
 

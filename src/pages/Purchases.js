@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getPurchases } from '../store/slices/purchases.slice';
@@ -11,8 +10,7 @@ const Purchases = () => {
     const navigate = useNavigate();
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
-
-
+    
     useEffect(() => {
         dispatch(getPurchases());
     }, [dispatch]);
@@ -22,31 +20,31 @@ const Purchases = () => {
             <h1>Compras</h1>
             {
                 purchases.map(purchases => (
-                    <Card className='my-5 d-flex justify-content-sm-between' key={purchases.createdAt}>
-                        <Card.Header> {new Date(purchases.createdAt).toLocaleDateString('es-mx', options)}</Card.Header>
-                        <Card.Body>
-                            <Card.Title>
-                                <table className="table mx-2">
+                    <div className='my-5 border rounded' key={purchases.createdAt}>
+                        <div className='fw-bold p-4 border-bottom'>
+                            {new Date(purchases.createdAt).toLocaleDateString('es-mx', options)}{/*purchases.map(prod =>Number([prod.cart.products.price])).reduce((a, b) => a + b,0)*/}
+                        </div>
+                        <div className='text-end'>
+                                <table className="table table-borderless mx-2 p-3">
                                     <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
+                                        <tr className='row p-3'>
+                                            <th className='col text-start py-3'>Producto</th>
+                                            <th className='col py-3'>Cantidad</th>
+                                            <th className='col pe-5'> Precio</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                      {purchases.cart.products.map(prod => (
-                                        <tr onClick={() => navigate(`/Products/${prod.productsInCart.id}`)} key={prod.id}>
-                                            <th scope="row">{prod.title}</th>
-                                            <td>{prod.productsInCart.quantity}</td>
-                                            <td>${prod.price}</td>
+                                        <tr className='row p-3' onClick={() => navigate(`/Products/${prod.productsInCart.id}`)} key={prod.id}>
+                                            <th className='col text-start py-3'>{prod.title}</th>
+                                            <td className='col py-3'>{prod.productsInCart.quantity}</td>
+                                            <td className='col pe-5'>${prod.price}</td>
                                         </tr>
                                     ))}
                                     </tbody>
                                 </table>
-                            </Card.Title>
-                        </Card.Body>
-                    </Card>
+                        </div>
+                    </div>
                 ))
             }
         </div>
